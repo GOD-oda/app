@@ -1,4 +1,4 @@
-FROM php:8.1.3-fpm-buster
+FROM php:8.1.3-fpm
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
 	COMPOSER_HOME=/composer
@@ -12,4 +12,5 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install
+RUN composer install && \
+    chmod -R 777 storage bootstrap/cache
