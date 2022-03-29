@@ -16,5 +16,9 @@ FROM base AS prod
 
 COPY ./src .
 
-RUN composer install --no-dev && \
-    chmod -R 777 storage bootstrap/cache
+RUN composer install --no-dev
+
+RUN php artisan cache:clear && \
+    php artisan config:clear && \
+    php artisan route:clear && \
+    chown -R www-data:www-data storage bootstrap/cache
