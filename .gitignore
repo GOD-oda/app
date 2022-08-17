@@ -2,3 +2,5 @@
 /vendor/
 .phpunit.result.cache
 .DS_Store
+
+deployment/container-deployment.json
