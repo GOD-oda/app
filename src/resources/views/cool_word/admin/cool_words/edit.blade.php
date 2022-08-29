@@ -20,12 +20,13 @@
       </div>
     @endif
 
-    <form action="{{ route('cool_words.admin.create') }}" method="post">
+    <form action="{{ route('cool_word.admin.cool_words.update', ['id' => $id]) }}" method="post">
+      @method('put')
       @csrf
 
       <div class="mb-3">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
+        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $name) }}">
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>

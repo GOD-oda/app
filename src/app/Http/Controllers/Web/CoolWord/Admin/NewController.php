@@ -11,6 +11,6 @@ class NewController extends Controller
      */
     public function __invoke()
     {
-        return view('cool_words.admin.new');
+        return view('cool_word.admin.cool_words.new');
     }
 }

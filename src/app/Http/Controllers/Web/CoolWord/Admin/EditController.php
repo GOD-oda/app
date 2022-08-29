@@ -16,6 +16,6 @@ class EditController extends Controller
     {
         $model = CoolWord::findOrFail($id);
 
-        return view('cool_words.admin.edit', $model->toArray());
+        return view('cool_word.admin.cool_words.edit', $model->toArray());
     }
 }

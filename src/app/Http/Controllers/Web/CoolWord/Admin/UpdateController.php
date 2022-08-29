@@ -34,7 +34,7 @@ class UpdateController extends Controller
         $coolWordId = $coolWordRepository->store($coolWord);
         $newCoolWord = $coolWordRepository->findById($coolWordId);
 
-        return redirect()->route('cool_words.admin.show', ['id' => $newCoolWord->id->value])
+        return redirect()->route('cool_word.admin.cool_words.show', ['id' => $newCoolWord->id->value])
             ->with('success_msg', '更新成功');
     }
 }
