@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CoolWord\Infra\CoolWord;
 
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
+use CoolWord\Domain\CoolWord\CoolWordList;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
 
@@ -49,5 +52,14 @@ class EloquentCoolWord implements CoolWordRepository
         $eloquentCoolWord->save();
 
         return new CoolWordId($eloquentCoolWord->id);
+    }
+
+    public function index(int $limit = 25, int $offset = 0): CoolWordList
+    {
+        $list = \App\Models\CoolWord\CoolWord::skip($offset)
+            ->take($limit)
+            ->get();
+
+        return new CoolWordList($list->toArray());
     }
 }
