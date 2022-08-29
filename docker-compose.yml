@@ -9,6 +9,8 @@ services:
       - type: bind
         source: ./src
         target: /var/www/html
+    depends_on:
+      - db
   nginx:
     build:
       context: .
@@ -18,5 +20,15 @@ services:
       - "8000:80"
     depends_on:
       - app
-
-
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+      - db:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=laravel
+volumes:
+  db:

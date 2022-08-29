@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('cool_words')->name('cool_words.')->group(function () {
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::get('/new', \App\Http\Controllers\Web\CoolWord\Admin\NewController::class)->name('new');
+        Route::post('/create', \App\Http\Controllers\Web\CoolWord\Admin\CreateController::class)->name('create');
+        Route::get('/{id}', \App\Http\Controllers\Web\CoolWord\Admin\EditController::class)->name('show');
+        Route::put('/{id}', \App\Http\Controllers\Web\CoolWord\Admin\UpdateController::class)->name('update');
+    });
 });
