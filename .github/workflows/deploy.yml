@@ -1,0 +1,45 @@
+name: learn-github-actions
+on:
+  push:
+    branches:
+      - gh-actions # TODO: マージ前にmasterに変更する
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup AWS cli and lightsail plugin
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install --update
+          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
+          sudo chmod +x /usr/local/bin/lightsailctl
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: Build images
+        run: |
+          docker build --no-cache -t ${{ secrets.APP_IMAGE_NAME }} --target prod -f ./docker/php/Dockerfile .
+          docker build --no-cache -t ${{ secrets.WEB_IMAGE_NAME }} --target prod -f ./docker/nginx/Dockerfile .
+      - name: Push images
+        run: |
+          aws lightsail push-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} --label app --image ${{ secrets.APP_IMAGE_NAME }}
+          aws lightsail push-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} --label web --image ${{ secrets.WEB_IMAGE_NAME }}
+      - name: Deploy
+        run: |
+          LIGHTSAIL_CONTAINERS=$(aws lightsail get-container-images --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }})
+          
+          APP_IMAGE=$(echo "$LIGHTSAIL_CONTAINERS" | jq --raw-output 'limit(1; .containerImages[] | select(.image | contains("app")) | .image)')
+          WEB_IMAGE=$(echo "$LIGHTSAIL_CONTAINERS" | jq --raw-output 'limit(1; .containerImages[] | select(.image | contains("web")) | .image)')
+          
+          sed -e "s/<APP_IMAGE>/${APP_IMAGE}/" \
+              -e "s/<WEB_IMAGE>/${WEB_IMAGE}/" \
+              ./deployment/template-container-deployment.json > ./deployment/container-deployment.json
+
+          aws lightsail create-container-service-deployment \
+            --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} \
+            --cli-input-json file://./deployment/container-deployment.json
