@@ -1,8 +1,8 @@
-name: learn-github-actions
+name: Deployment
 on:
   push:
     branches:
-      - gh-actions # TODO: マージ前にmasterに変更する
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
