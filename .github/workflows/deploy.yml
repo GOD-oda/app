@@ -44,6 +44,7 @@ jobs:
               -e "s/<DB_HOST>/${{ secrets.DB_HOST }}/" \
               -e "s/<DB_PASSWORD>/${{ secrets.DB_PASSWORD }}/" \
               -e "s/<DB_USERNAME>/${{ secrets.DB_USERNAME }}/" \
+              -e "s/<SLACK_WEB_HOOK_URL>${{ secrets.SLACK_WEB_HOOK_URL }}/" \
               ./deployment/template-container-deployment.json > ./deployment/container-deployment.json
 
           aws lightsail create-container-service-deployment \
