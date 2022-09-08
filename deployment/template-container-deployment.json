@@ -11,8 +11,7 @@
         "DB_HOST": "<DB_HOST>",
         "DB_PASSWORD": "<DB_PASSWORD>",
         "DB_USERNAME": "<DB_USERNAME>"
-      },
-      "command": ["php", "artisan", "migrate", "--force"]
+      }
     },
     "web": {
       "image": "<WEB_IMAGE>",
