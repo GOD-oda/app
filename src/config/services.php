@@ -31,4 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'slack' => [
+        'web_hook_url' => env('SLACK_WEB_HOOK_URL')
+    ],
 ];

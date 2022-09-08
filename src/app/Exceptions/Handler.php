@@ -2,11 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Notifications\ExceptionNotification;
+use App\Notifications\SlackNotifiable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use SlackNotifiable;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -35,7 +39,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            $this->notify(new ExceptionNotification($e));
         });
     }
 }
