@@ -1,8 +1,10 @@
-.PHONY: up
 up:
 	docker compose up -d
 
-.PHONY: setup
+restart:
+	docker compose down -v --rmi all
+	@make up
+
 setup:
 	mkdir -p src
 	@make build
@@ -15,6 +17,6 @@ setup:
 build:
 	docker compose build --force-rm --no-cache
 
-.PHONY: deploy
-deploy:
-	@sh deploy
+rebuild:
+	docker compose down -v --rmi all
+	@make build

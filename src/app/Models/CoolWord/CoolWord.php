@@ -2,12 +2,8 @@
 
 namespace App\Models\CoolWord;
 
-use Illuminate\Database\Eloquent\Model;
-
-class CoolWord extends Model
+class CoolWord extends BaseModel
 {
-    protected $connection = 'cool_word';
-
     protected $fillable = [
         'name'
     ];
