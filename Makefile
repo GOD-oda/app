@@ -20,3 +20,6 @@ build:
 rebuild:
 	docker compose down -v --rmi all
 	@make build
+
+test:
+	docker compose run --rm app composer phpunit
