@@ -1,11 +1,14 @@
 name: Deployment
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows:
+      - Phpunit
+    types:
+      - completed
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Setup AWS cli and lightsail plugin
@@ -32,7 +35,7 @@ jobs:
       - name: Deploy
         run: |
           LIGHTSAIL_CONTAINERS=$(aws lightsail get-container-images --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }})
-          
+
           APP_IMAGE=$(echo "$LIGHTSAIL_CONTAINERS" | jq --raw-output 'limit(1; .containerImages[] | select(.image | contains("app")) | .image)')
           WEB_IMAGE=$(echo "$LIGHTSAIL_CONTAINERS" | jq --raw-output 'limit(1; .containerImages[] | select(.image | contains("web")) | .image)')
 
