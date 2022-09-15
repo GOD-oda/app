@@ -17,7 +17,7 @@ FROM base AS prod
 
 COPY ./src .
 
-RUN composer install --no-dev
+RUN composer install --ansi --quiet --no-interaction --no-dev --no-scripts --prefer-dist
 
 RUN php artisan cache:clear && \
     php artisan config:clear && \
