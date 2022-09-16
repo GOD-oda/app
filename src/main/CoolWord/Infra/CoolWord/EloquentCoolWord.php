@@ -6,9 +6,9 @@ namespace CoolWord\Infra\CoolWord;
 
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
-use CoolWord\Domain\CoolWord\CoolWordList;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
+use Illuminate\Support\Enumerable;
 
 class EloquentCoolWord implements CoolWordRepository
 {
@@ -54,12 +54,13 @@ class EloquentCoolWord implements CoolWordRepository
         return new CoolWordId($eloquentCoolWord->id);
     }
 
-    public function index(int $limit = 25, int $offset = 0): CoolWordList
+    public function forPage(int $page, int $perPage): Enumerable
     {
-        $list = \App\Models\CoolWord\CoolWord::skip($offset)
-            ->take($limit)
-            ->get();
+        return \App\Models\CoolWord\CoolWord::forPage($page, $perPage)->get();
+    }
 
-        return new CoolWordList($list->toArray());
+    public function count(): int
+    {
+        return \App\Models\CoolWord\CoolWord::count();
     }
 }
