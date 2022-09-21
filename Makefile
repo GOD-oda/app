@@ -26,3 +26,6 @@ rebuild:
 
 test:
 	docker compose run --rm app composer phpunit
+
+static_analyse:
+	docker compose run --rm app composer phpstan

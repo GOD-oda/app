@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class NameTest extends TestCase
 {
-    public function testInvalidArgumentWithEmptyValue()
+    public function testInvalidArgumentWithEmptyValue(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectErrorMessage('name is required.');
@@ -15,7 +15,7 @@ class NameTest extends TestCase
         new Name('');
     }
 
-    public function testValue()
+    public function testValue(): void
     {
         $name = new Name('foo');
         $this->assertSame('foo', $name->value);

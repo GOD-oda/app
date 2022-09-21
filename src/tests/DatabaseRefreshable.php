@@ -6,7 +6,7 @@ namespace Tests;
 
 trait DatabaseRefreshable
 {
-    public function refreshDatabase()
+    public function refreshDatabase(): void
     {
         $this->artisan('migrate:refresh');
     }
