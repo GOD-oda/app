@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+    private const PER_PAGE = 25;
+
     /**
      * Handle the incoming request.
      *
@@ -16,11 +18,24 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request, CoolWordRepository $coolWordRepository)
     {
-        $coolWords = $coolWordRepository->index(
-            limit: $request->get('limit', 25),
-            offset: $request->get('offset', 0)
+        $currentPage = Paginator::resolveCurrentPage();
+
+        $count = $coolWordRepository->count();
+        $coolWords = $coolWordRepository->forPage(
+            page: $currentPage,
+            perPage: static::PER_PAGE
         );
 
-        return view('cool_word.admin.cool_words.index', compact('coolWords'));
+        $paginator = new Paginator(
+            items: $coolWords,
+            total: $count,
+            perPage: static::PER_PAGE,
+            currentPage: $currentPage,
+            options: [
+                'path' => route('cool_word.admin.cool_words.index')
+            ]
+        );
+
+        return view('cool_word.admin.cool_words.index', compact('paginator'));
     }
 }

@@ -10,7 +10,10 @@ services:
         source: ./src
         target: /var/www/html
     depends_on:
-      - db
+      db:
+        condition: service_started
+      test-db:
+        condition: service_healthy
   nginx:
     build:
       context: .
@@ -30,5 +33,16 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=laravel
+  test-db:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    volumes:
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=laravel
+    healthcheck:
+      test: "exit 0"
 volumes:
   db:
