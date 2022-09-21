@@ -1,8 +1,11 @@
 up:
-	docker compose up -d
+	docker compose up -d --remove-orphans
+
+down:
+	docker compose down -v --remove-orphans
 
 restart:
-	docker compose down -v --rmi all
+	@make down
 	@make up
 
 setup:
@@ -18,7 +21,7 @@ build:
 	docker compose build --force-rm --no-cache
 
 rebuild:
-	docker compose down -v --rmi all
+	docker compose down -v --remove-orphans --rmi all
 	@make build
 
 test:
