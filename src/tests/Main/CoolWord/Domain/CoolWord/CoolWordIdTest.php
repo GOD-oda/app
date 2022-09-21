@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class CoolWordIdTest extends TestCase
 {
-    public function testId()
+    public function testId(): void
     {
         $coolWordId = new CoolWordId(1);
         $this->assertSame(1, $coolWordId->value);

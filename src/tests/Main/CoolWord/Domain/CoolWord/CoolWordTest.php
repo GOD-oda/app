@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CoolWordTest extends TestCase
 {
-    public function testName()
+    public function testName(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -21,7 +21,7 @@ class CoolWordTest extends TestCase
         $this->assertInstanceOf(Name::class, $coolWord->name());
     }
 
-    public function testChangeName()
+    public function testChangeName(): void
     {
         $beforeName = new Name('foo');
         $coolWord = new CoolWord(

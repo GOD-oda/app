@@ -24,7 +24,7 @@ class CoolWordRepositoryTest extends TestCase
         $this->repository = $this->app->make(CoolWordRepository::class);
     }
 
-    public function testCount()
+    public function testCount(): void
     {
         $this->assertSame(0, $this->repository->count());
 
