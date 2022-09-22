@@ -25,8 +25,8 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $input = $request->toArray();
         $currentPage = Paginator::resolveCurrentPage();
-
         $where = [
             'name' => $request->get('name', '')
         ];
@@ -52,6 +52,6 @@ class IndexController extends Controller
         );
         $paginator->withQueryString();
 
-        return view('cool_word.admin.cool_words.index', compact('paginator'));
+        return view('cool_word.admin.cool_words.index', compact('paginator', 'input'));
     }
 }
