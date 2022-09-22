@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace CoolWord\Infra\CoolWord;
 
 use CoolWord\Domain\CoolWord\CoolWord;
+use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
+use CoolWord\Domain\CoolWord\CoolWordPaginator;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
-use Illuminate\Support\Enumerable;
 
 class EloquentCoolWord implements CoolWordRepository
 {
@@ -54,13 +55,27 @@ class EloquentCoolWord implements CoolWordRepository
         return new CoolWordId($eloquentCoolWord->id);
     }
 
-    public function forPage(int $page, int $perPage): Enumerable
+    public function index(int $page, int $perPage, array $where = []): CoolWordCollection
     {
-        return \App\Models\CoolWord\CoolWord::forPage($page, $perPage)->get();
+        $eloquentCoolWords = \App\Models\CoolWord\CoolWord::query()
+            ->name($where['name'] ?? '')
+            ->forPage($page, $perPage)
+            ->get();
+
+        $collection = $eloquentCoolWords->map(function (\App\Models\CoolWord\CoolWord $coolWord) {
+            return new CoolWord(
+                id: new CoolWordId($coolWord->id),
+                name: new Name($coolWord->name)
+            );
+        });
+
+        return new CoolWordCollection(...$collection);
     }
 
-    public function count(): int
+    public function count(array $where = []): int
     {
-        return \App\Models\CoolWord\CoolWord::count();
+        return \App\Models\CoolWord\CoolWord::query()
+            ->name($where['name'] ?? '')
+            ->count();
     }
 }

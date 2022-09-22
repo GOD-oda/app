@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace CoolWord\Domain\CoolWord;
 
-use Illuminate\Support\Enumerable;
-
 interface CoolWordRepository
 {
-    public function forPage(int $page, int $perPage): Enumerable;
+    public function index(int $page, int $perPage, array $where = []): CoolWordCollection;
 
     public function findById(CoolWordId $id): ?CoolWord;
 
@@ -16,5 +14,5 @@ interface CoolWordRepository
 
     public function store(CoolWord $coolWord): CoolWordId;
 
-    public function count(): int;
+    public function count(array $where = []): int;
 }
