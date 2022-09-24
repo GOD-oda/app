@@ -62,7 +62,6 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            // @phpstan-ignore-next-line
             'model' => App\Models\User::class,
         ],
 
