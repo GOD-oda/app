@@ -12,4 +12,4 @@ jobs:
       - name: Init
         run: make setup
       - name: Run phpstan
-        run: make static_analyse
+        run: make phpstan
