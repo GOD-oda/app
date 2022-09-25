@@ -29,6 +29,7 @@ Route::controller(\App\Http\Controllers\LoginController::class)->name('login.')-
     Route::get('/login', 'show')->name('show');
     Route::post('/login', 'login')->name('login');
     Route::post('/register', 'register')->name('register');
+    Route::post('/logout', 'logout')->name('logout');
 });
 
 Route::controller(\App\Http\Controllers\RegisterController::class)->name('register.')->group(function () {

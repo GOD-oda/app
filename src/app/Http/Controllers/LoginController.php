@@ -50,6 +50,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('cool_word.admin.cool_words.login');
+        return redirect()->route('login.login');
     }
 }
