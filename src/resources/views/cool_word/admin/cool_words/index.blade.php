@@ -18,6 +18,7 @@
           <div class="card">
             <div class="card-body">
               <p>{{ $coolWord['name'] }}</p>
+              <p>閲覧数: {{ $coolWord['views'] }}</p>
 
               <a href="{{ route('cool_word.admin.cool_words.show', ['id' => $coolWord['id']]) }}" class="btn btn-primary">詳細</a>
             </div>

@@ -7,7 +7,6 @@ namespace CoolWord\Infra\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
-use CoolWord\Domain\CoolWord\CoolWordPaginator;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
 
@@ -22,7 +21,8 @@ class EloquentCoolWord implements CoolWordRepository
 
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
-            name: new Name($coolWord->name)
+            name: new Name($coolWord->name),
+            views: $coolWord->views
         );
     }
 
@@ -37,7 +37,8 @@ class EloquentCoolWord implements CoolWordRepository
 
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
-            name: new Name($coolWord->name)
+            name: new Name($coolWord->name),
+            views: $coolWord->views
         );
     }
 
@@ -50,6 +51,7 @@ class EloquentCoolWord implements CoolWordRepository
         }
 
         $eloquentCoolWord->name = $coolWord->name()->value;
+        $eloquentCoolWord->views = $coolWord->views();
         $eloquentCoolWord->save();
 
         return new CoolWordId($eloquentCoolWord->id);
@@ -65,7 +67,8 @@ class EloquentCoolWord implements CoolWordRepository
         $collection = $eloquentCoolWords->map(function (\App\Models\CoolWord\CoolWord $coolWord) {
             return new CoolWord(
                 id: new CoolWordId($coolWord->id),
-                name: new Name($coolWord->name)
+                name: new Name($coolWord->name),
+                views: $coolWord->views
             );
         });
 
@@ -77,5 +80,14 @@ class EloquentCoolWord implements CoolWordRepository
         return \App\Models\CoolWord\CoolWord::query()
             ->name($where['name'] ?? '')
             ->count();
+    }
+
+    public function countUpViews(CoolWordId $id, int $increments): void
+    {
+        $coolWord = $this->findById($id);
+
+        $coolWord->countUpViews($increments);
+
+        $this->store($coolWord);
     }
 }

@@ -15,7 +15,10 @@ use Illuminate\Validation\ValidationException;
 
 class CreateController extends Controller
 {
-    public function __construct(private CoolWordService $coolWordService, private CoolWordRepository $coolWordRepository) {}
+    public function __construct(
+        private CoolWordService $coolWordService,
+        private CoolWordRepository $coolWordRepository
+    ) {}
 
     /**
      * Handle the incoming request.
@@ -28,7 +31,8 @@ class CreateController extends Controller
     {
         $coolWord = new CoolWord(
             id: null,
-            name: new Name($request->get('name'))
+            name: new Name($request->get('name')),
+            views: 0
         );
         if ($this->coolWordService->isDuplicated($coolWord)) {
             throw ValidationException::withMessages([

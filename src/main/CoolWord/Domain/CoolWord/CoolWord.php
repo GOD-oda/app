@@ -8,7 +8,8 @@ final class CoolWord
 {
     public function __construct(
         private readonly ?CoolWordId $id,
-        private Name $name
+        private Name $name,
+        private int $views
     ) {}
 
     public function id(): ?CoolWordId
@@ -29,5 +30,15 @@ final class CoolWord
     public function changeName(Name $name): void
     {
         $this->name = $name;
+    }
+
+    public function views(): int
+    {
+        return $this->views;
+    }
+
+    public function countUpViews(int $increments): void
+    {
+        $this->views += $increments;
     }
 }

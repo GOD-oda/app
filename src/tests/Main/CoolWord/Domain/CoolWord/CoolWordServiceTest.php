@@ -33,7 +33,8 @@ class CoolWordServiceTest extends TestCase
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
-            name: new Name('foo')
+            name: new Name('foo'),
+            views: 0
         );
         $this->assertFalse($this->service->isDuplicated($coolWord));
     }
@@ -42,13 +43,15 @@ class CoolWordServiceTest extends TestCase
     {
         $coolWord = new CoolWord(
             id: null,
-            name: new Name('foo')
+            name: new Name('foo'),
+            views: 0
         );
         $this->repository->store($coolWord);
 
         $anotherCoolWord = new CoolWord(
             id: new CoolWordId(1),
-            name: new Name('foo')
+            name: new Name('foo'),
+            views: 0
         );
 
         $this->assertTrue($this->service->isDuplicated($anotherCoolWord));
