@@ -1,13 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Web\CoolWord\Admin;
 
 use App\Http\Controllers\Controller;
-use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\CoolWordService;
-use CoolWord\Domain\CoolWord\Name;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 

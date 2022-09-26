@@ -7,11 +7,11 @@ namespace CoolWord\Domain\CoolWord;
 final class CoolWord
 {
     public function __construct(
-        private readonly CoolWordId $id,
+        private readonly ?CoolWordId $id,
         private Name $name
     ) {}
 
-    public function id(): CoolWordId
+    public function id(): ?CoolWordId
     {
         return $this->id;
     }
