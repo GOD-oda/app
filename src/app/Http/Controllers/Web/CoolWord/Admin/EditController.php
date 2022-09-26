@@ -12,8 +12,7 @@ use Illuminate\Events\Dispatcher;
 class EditController extends Controller
 {
     public function __construct(
-        private CoolWordRepository $coolWordRepository,
-        private Dispatcher $dispatcher
+        private CoolWordRepository $coolWordRepository
     ) {}
 
 
@@ -28,8 +27,6 @@ class EditController extends Controller
 
         $coolWord = $this->coolWordRepository->findById($coolWordId);
         $resource = CoolWordResource::make($coolWord);
-
-        $this->dispatcher->dispatch(new CoolWordViewed($coolWordId));
 
         return view('cool_word.admin.cool_words.edit', $resource->toArray());
 
