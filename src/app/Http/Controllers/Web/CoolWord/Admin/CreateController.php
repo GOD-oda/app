@@ -15,30 +15,30 @@ use Illuminate\Validation\ValidationException;
 
 class CreateController extends Controller
 {
+    public function __construct(private CoolWordService $coolWordService, private CoolWordRepository $coolWordRepository) {}
+
     /**
      * Handle the incoming request.
      *
      * @param Request $request
-     * @param CoolWordService $coolWordService
-     * @param CoolWordRepository $coolWordRepository
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function __invoke(Request $request, CoolWordService $coolWordService, CoolWordRepository $coolWordRepository)
+    public function __invoke(Request $request): RedirectResponse
     {
         $coolWord = new CoolWord(
             id: null,
             name: new Name($request->get('name'))
         );
-        if ($coolWordService->isDuplicated($coolWord)) {
+        if ($this->coolWordService->isDuplicated($coolWord)) {
             throw ValidationException::withMessages([
                 'errorMsg' => [
                     '名前は既に存在しています'
                 ]
             ]);
         }
-        $coolWordId = $coolWordRepository->store($coolWord);
-        $newCoolWord = $coolWordRepository->findById($coolWordId);
+        $coolWordId = $this->coolWordRepository->store($coolWord);
+        $newCoolWord = $this->coolWordRepository->findById($coolWordId);
 
         return redirect()->route('cool_word.admin.cool_words.show', ['id' => $newCoolWord->id()->value])
             ->with('success_msg', '作成成功');
