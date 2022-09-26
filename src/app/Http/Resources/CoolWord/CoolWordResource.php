@@ -16,7 +16,8 @@ class CoolWordResource extends JsonResource
     {
         return [
             'id' => $this->id()->value,
-            'name' => $this->name()->value
+            'name' => $this->name()->value,
+            'views' => $this->views(),
         ];
     }
 }

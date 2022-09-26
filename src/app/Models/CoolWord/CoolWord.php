@@ -19,7 +19,8 @@ class CoolWord extends BaseModel
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'views',
     ];
 
     public function scopeName(Builder $query, string $name): void

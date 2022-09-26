@@ -17,7 +17,8 @@ class CoolWordCollectionTest extends TestCase
         $collection = new CoolWordCollection();
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
-            name: new Name('foo')
+            name: new Name('foo'),
+            views: 0
         );
         $collection = $collection->add($coolWord);
 

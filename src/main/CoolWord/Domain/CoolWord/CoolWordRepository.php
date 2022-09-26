@@ -15,4 +15,6 @@ interface CoolWordRepository
     public function store(CoolWord $coolWord): CoolWordId;
 
     public function count(array $where = []): int;
+
+    public function countUpViews(CoolWordId $id, int $increments): void;
 }
