@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Web\CoolWord\Admin;
 
 use App\Http\Controllers\Controller;
@@ -38,7 +40,7 @@ class CreateController extends Controller
         $coolWordId = $coolWordRepository->store($coolWord);
         $newCoolWord = $coolWordRepository->findById($coolWordId);
 
-        return redirect()->route('cool_word.admin.cool_words.show', ['id' => $newCoolWord->id->value])
+        return redirect()->route('cool_word.admin.cool_words.show', ['id' => $newCoolWord->id()->value])
             ->with('success_msg', '作成成功');
     }
 }

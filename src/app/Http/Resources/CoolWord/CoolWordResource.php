@@ -15,7 +15,7 @@ class CoolWordResource extends JsonResource
     public function toArray($request = null)
     {
         return [
-            'id' => $this->id->value,
+            'id' => $this->id()->value,
             'name' => $this->name()->value
         ];
     }
