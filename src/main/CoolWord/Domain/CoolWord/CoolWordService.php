@@ -13,7 +13,14 @@ final class CoolWordService
     public function isDuplicated(CoolWord $coolWord): bool
     {
         $found = $this->coolWordRepository->findByName($coolWord->name());
+        if ($found === null) {
+            return false;
+        }
 
-        return $found !== null;
+        if ($coolWord->id()->value !== $found->id()->value && $coolWord->name()->value === $found->name()->value) {
+            return true;
+        }
+
+        return false;
     }
 }

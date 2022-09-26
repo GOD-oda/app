@@ -44,7 +44,7 @@ class EloquentCoolWord implements CoolWordRepository
     public function store(CoolWord $coolWord): CoolWordId
     {
         if ($coolWord->hasId()) {
-            $eloquentCoolWord = \App\Models\CoolWord\CoolWord::findOrFail($coolWord->id->value);
+            $eloquentCoolWord = \App\Models\CoolWord\CoolWord::findOrFail($coolWord->id()->value);
         } else {
             $eloquentCoolWord = new \App\Models\CoolWord\CoolWord();
         }
