@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\CoolWord\Domain\CoolWord;
+namespace Tests\Main\CoolWord\Domain\CoolWord;
 
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
