@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->prefix('cool_word')->name('cool_word.')->group(function () {
-    Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('cool_word')->name('cool_word.')->group(function () {
+    Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
         Route::prefix('cool_words')->name('cool_words.')->group(function () {
             Route::get('/', \App\Http\Controllers\Web\CoolWord\Admin\IndexController::class)->name('index');
             Route::get('/new', \App\Http\Controllers\Web\CoolWord\Admin\NewController::class)->name('new');
@@ -23,6 +23,8 @@ Route::middleware(['auth'])->prefix('cool_word')->name('cool_word.')->group(func
             Route::put('/{id}', \App\Http\Controllers\Web\CoolWord\Admin\UpdateController::class)->name('update');
         });
     });
+
+    Route::get('/', \App\Http\Controllers\Web\CoolWord\Public\IndexController::class)->name('index');
 });
 
 Route::prefix('auth')->name('auth.')->group(function () {
