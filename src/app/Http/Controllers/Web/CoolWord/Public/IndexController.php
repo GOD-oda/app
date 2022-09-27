@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web\CoolWord\Public;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Web\CoolWord\Admin\Paginator;
 use App\Http\Resources\CoolWord\CoolWordResource;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use Illuminate\Contracts\View\View;
