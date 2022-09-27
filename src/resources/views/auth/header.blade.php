@@ -7,7 +7,7 @@
         </div>
 
         <div class="col-sm-1">
-          <form action="{{ route('login.logout') }}" method="POST">
+          <form action="{{ route('auth.login.logout') }}" method="POST">
             @csrf
 
             <button type="submit" class="btn btn-primary">Log out</button>
