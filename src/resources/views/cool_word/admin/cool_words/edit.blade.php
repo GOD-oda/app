@@ -1,4 +1,4 @@
-@extends('base')
+@extends('cool_word.admin.base')
 
 @section('main')
   <div class="container py-3">

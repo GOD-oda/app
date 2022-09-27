@@ -1,8 +1,8 @@
-@extends('base')
+@extends('admin_base')
 
 @section('main')
   <div class="container py-3">
-    <form method="POST" action="{{ route('register.register') }}">
+    <form method="POST" action="{{ route('auth.register.register') }}">
       @csrf
 
       <div class="row mb-3">

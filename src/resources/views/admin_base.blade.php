@@ -10,7 +10,7 @@
 </head>
 <body>
 <main>
-  @include('header')
+  @yield('navigation')
 
   @yield('main')
 </main>
