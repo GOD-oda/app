@@ -32,10 +32,11 @@ class IndexController extends Controller
             perPage: static::PER_PAGE,
         );
 
+        $count = $this->coolWordRepository->count();
         $resource = CoolWordResource::collection($coolWordCollection->all());
         $paginator = new Paginator(
             items: $resource->toArray($request),
-            total: 0,
+            total: $count,
             perPage: static::PER_PAGE,
             currentPage: $currentPage,
             options: [
