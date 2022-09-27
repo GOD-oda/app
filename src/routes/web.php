@@ -25,6 +25,7 @@ Route::prefix('cool_word')->name('cool_word.')->group(function () {
     });
 
     Route::get('/', \App\Http\Controllers\Web\CoolWord\Public\IndexController::class)->name('index');
+    Route::get('/{id}', \App\Http\Controllers\Web\CoolWord\Public\ShowController::class)->name('show');
 });
 
 Route::prefix('auth')->name('auth.')->group(function () {
