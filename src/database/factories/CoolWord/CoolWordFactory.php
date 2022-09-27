@@ -20,7 +20,8 @@ class CoolWordFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'foo'
+            'name' => $this->faker->name(),
+            'views' => 0
         ];
     }
 }
