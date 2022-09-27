@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin_base')
 
 @section('main')
   <div class="container py-3">
