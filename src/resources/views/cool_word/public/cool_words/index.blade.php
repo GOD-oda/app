@@ -4,7 +4,7 @@
   <div class="container py-3">
     <div class="row">
       @foreach ($paginator->items() as $coolWord)
-        <div class="col-4 my-3 ml-5">
+        <div class="col-sm-12 col-md-4 my-3 ml-5">
           <div class="card">
             <div class="card-body">
               <h4><a href="{{ route('cool_word.show', ['id' => $coolWord['id']]) }}">{{ $coolWord['name'] }}</a></h4>
