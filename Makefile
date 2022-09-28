@@ -7,6 +7,7 @@ down:
 restart:
 	@make down
 	@make up
+	docker compose exec app composer setup-data
 
 setup:
 	mkdir -p src
