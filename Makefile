@@ -17,6 +17,7 @@ setup:
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
 	docker compose exec app php artisan storage:link
+	docker compose exec app composer setup-data
 
 build:
 	docker compose build --force-rm --no-cache
