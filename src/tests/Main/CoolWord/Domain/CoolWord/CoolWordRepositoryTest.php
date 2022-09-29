@@ -6,6 +6,7 @@ namespace Tests\Main\CoolWord\Domain\CoolWord;
 
 use App\Models\CoolWord\CoolWord as EloquentCoolWord;
 use CoolWord\Domain\CoolWord\CoolWord;
+use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
@@ -26,6 +27,33 @@ class CoolWordRepositoryTest extends TestCase
         $this->refreshDatabase();
 
         $this->repository = $this->app->make(CoolWordRepository::class);
+    }
+
+    /**
+     * @param array $initialCoolWordParameters
+     * @param int $page
+     * @param int $perPage
+     * @param array $where
+     * @param int $expectedCount
+     * @return void
+     * @dataProvider providesIndexPatterns
+     */
+    public function testIndex(array $initialCoolWordParameters, int $page, int $perPage, array $where, int $expectedCount): void
+    {
+        CoolWordFactory::new($initialCoolWordParameters)->create();
+
+        $res = $this->repository->index($page, $perPage, $where);
+        $this->assertInstanceOf(CoolWordCollection::class, $res);
+        $this->assertCount($expectedCount, $res);
+    }
+
+    private function providesIndexPatterns(): array
+    {
+        return [
+            [[], 1, 1, [], 1],
+            [['name' => 'foo'], 1, 1, ['name' => 'foo'], 1],
+            [[], 1, 1, ['name' => 'foo'], 0],
+        ];
     }
 
     public function testFindById(): void
