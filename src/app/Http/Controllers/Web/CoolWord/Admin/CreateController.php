@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Web\CoolWord\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CoolWord\Admin\StoreCoolWordFormRequest;
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\CoolWordService;
 use CoolWord\Domain\CoolWord\Name;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class CreateController extends Controller
@@ -23,15 +23,15 @@ class CreateController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param Request $request
+     * @param StoreCoolWordFormRequest $request
      * @return RedirectResponse
      * @throws ValidationException
      */
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(StoreCoolWordFormRequest $request): RedirectResponse
     {
         $coolWord = new CoolWord(
             id: null,
-            name: new Name($request->get('name')),
+            name: new Name($request->validated('name')),
             views: 0
         );
         if ($this->coolWordService->isDuplicated($coolWord)) {
