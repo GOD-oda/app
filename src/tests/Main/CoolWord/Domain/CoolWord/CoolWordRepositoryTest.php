@@ -8,6 +8,7 @@ use App\Models\CoolWord\CoolWord as EloquentCoolWord;
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
+use CoolWord\Domain\CoolWord\Name;
 use Database\Factories\CoolWord\CoolWordFactory;
 use Tests\DatabaseRefreshable;
 use Tests\TestCase;
@@ -36,6 +37,18 @@ class CoolWordRepositoryTest extends TestCase
         $coolWord = CoolWordFactory::new()->create();
         $coolWordId = new CoolWordId($coolWord->id);
         $res = $this->repository->findById($coolWordId);
+        $this->assertInstanceOf(CoolWord::class, $res);
+    }
+
+    public function testFindByName(): void
+    {
+        $name = new Name('foo');
+        $res = $this->repository->findByName($name);
+        $this->assertNull($res);
+
+        $coolWord = CoolWordFactory::new()->create();
+        $name = new Name($coolWord->name);
+        $res = $this->repository->findByName($name);
         $this->assertInstanceOf(CoolWord::class, $res);
     }
 
