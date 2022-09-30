@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CoolWordTest extends TestCase
 {
-    public function testId()
+    public function testId(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -48,7 +48,7 @@ class CoolWordTest extends TestCase
         $this->assertSame('bar', $coolWord->name()->value);
     }
 
-    public function testCountUpViews()
+    public function testCountUpViews(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -60,5 +60,17 @@ class CoolWordTest extends TestCase
         $coolWord->countUpViews(1);
 
         $this->assertSame(1, $coolWord->views());
+    }
+
+    public function testNew()
+    {
+        $name = new Name('foo');
+        $coolWord = CoolWord::new(
+            name: $name
+        );
+
+        $this->assertNull($coolWord->id());
+        $this->assertSame('foo', $coolWord->name()->value);
+        $this->assertSame(0, $coolWord->views());
     }
 }

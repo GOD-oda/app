@@ -41,4 +41,13 @@ final class CoolWord
     {
         $this->views += $increments;
     }
+
+    public static function new(Name $name): self
+    {
+        return new self(
+            id: null,
+            name: $name,
+            views: 0
+        );
+    }
 }

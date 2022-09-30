@@ -29,10 +29,8 @@ class CreateController extends Controller
      */
     public function __invoke(StoreCoolWordFormRequest $request): RedirectResponse
     {
-        $coolWord = new CoolWord(
-            id: null,
+        $coolWord = CoolWord::new(
             name: new Name($request->validated('name')),
-            views: 0
         );
         if ($this->coolWordService->isDuplicated($coolWord)) {
             throw ValidationException::withMessages([
