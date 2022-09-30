@@ -21,7 +21,8 @@ class CoolWordFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'views' => 0
+            'views' => 0,
+            'description' => $this->faker->randomAscii()
         ];
     }
 }
