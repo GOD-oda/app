@@ -66,6 +66,17 @@ class CoolWordTest extends TestCase
         $this->assertSame(1, $coolWord->views());
     }
 
+    public function testDescription(): void
+    {
+        $coolWord = new CoolWord(
+            id: new CoolWordId(1),
+            name: new Name('foo'),
+            views: 0,
+            description: 'foo'
+        );
+        $this->assertSame('foo', $coolWord->description());
+    }
+
     public function testNew()
     {
         $name = new Name('foo');
