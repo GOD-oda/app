@@ -31,6 +31,7 @@ class CreateController extends Controller
     {
         $coolWord = CoolWord::new(
             name: new Name($request->validated('name')),
+            description: $request->validated('description', '')
         );
         if ($this->coolWordService->isDuplicated($coolWord)) {
             throw ValidationException::withMessages([

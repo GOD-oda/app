@@ -9,7 +9,8 @@ final class CoolWord
     public function __construct(
         private readonly ?CoolWordId $id,
         private Name $name,
-        private int $views
+        private int $views,
+        private string $description
     ) {}
 
     public function id(): ?CoolWordId
@@ -42,12 +43,18 @@ final class CoolWord
         $this->views += $increments;
     }
 
-    public static function new(Name $name): self
+    public function description(): string
+    {
+        return $this->description;
+    }
+
+    public static function new(Name $name, string $description): self
     {
         return new self(
             id: null,
             name: $name,
-            views: 0
+            views: 0,
+            description: $description
         );
     }
 }

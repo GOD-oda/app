@@ -30,6 +30,9 @@ class StoreCoolWordFormRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'description' => [
+                'string'
+            ]
         ];
     }
 
