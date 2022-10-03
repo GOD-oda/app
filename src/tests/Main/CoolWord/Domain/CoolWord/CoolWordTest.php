@@ -11,19 +11,26 @@ use Tests\TestCase;
 
 class CoolWordTest extends TestCase
 {
-    public function testId(): void
+    public function testProperties(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: 'description'
         );
 
         $this->assertInstanceOf(CoolWordId::class, $coolWord->id());
+        $this->assertSame(1, $coolWord->id()->value);
+        $this->assertInstanceOf(Name::class, $coolWord->name());
+        $this->assertSame('foo', $coolWord->name()->value);
+        $this->assertIsInt($coolWord->views());
+        $this->assertSame(0, $coolWord->views());
+        $this->assertIsString($coolWord->description());
+        $this->assertSame('description', $coolWord->description());
     }
 
-    public function testName(): void
+    public function testHasId()
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -31,8 +38,15 @@ class CoolWordTest extends TestCase
             views: 0,
             description: ''
         );
+        $this->assertTrue($coolWord->hasId());
 
-        $this->assertInstanceOf(Name::class, $coolWord->name());
+        $coolWord = new CoolWord(
+            id: null,
+            name: new Name('foo'),
+            views: 0,
+            description: ''
+        );
+        $this->assertFalse($coolWord->hasId());
     }
 
     public function testChangeName(): void
@@ -66,7 +80,7 @@ class CoolWordTest extends TestCase
         $this->assertSame(1, $coolWord->views());
     }
 
-    public function testDescription(): void
+    public function testChangeDescription(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -74,14 +88,15 @@ class CoolWordTest extends TestCase
             views: 0,
             description: 'foo'
         );
-        $this->assertSame('foo', $coolWord->description());
+        $coolWord->changeDescription('bar');
+
+        $this->assertSame('bar', $coolWord->description());
     }
 
     public function testNew()
     {
-        $name = new Name('foo');
         $coolWord = CoolWord::new(
-            name: $name,
+            name: new Name('foo'),
             description: 'foo'
         );
 

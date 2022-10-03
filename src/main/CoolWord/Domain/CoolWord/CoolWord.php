@@ -48,6 +48,11 @@ final class CoolWord
         return $this->description;
     }
 
+    public function changeDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
     public static function new(Name $name, string $description): self
     {
         return new self(

@@ -18,6 +18,7 @@ class CoolWordResource extends JsonResource
             'id' => $this->id()->value,
             'name' => $this->name()->value,
             'views' => $this->views(),
+            'description' => $this->description()
         ];
     }
 }

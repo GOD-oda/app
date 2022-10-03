@@ -80,6 +80,23 @@ class CoolWordRepositoryTest extends TestCase
         $this->assertInstanceOf(CoolWord::class, $res);
     }
 
+    public function testStore(): void
+    {
+        $coolWord = CoolWord::new(
+            name: new Name('foo'),
+            description: 'description'
+        );
+
+        $coolWordId = $this->repository->store($coolWord);
+        $saved = $this->repository->findById($coolWordId);
+
+        $this->assertNotNull($saved->id());
+        // 値だけ確認できれば良いのでEqualsを使っている
+        $this->assertEquals($coolWord->name(), $saved->name());
+        $this->assertEquals($coolWord->views(), $saved->views());
+        $this->assertEquals($coolWord->description(), $saved->description());
+    }
+
     public function testCount(): void
     {
         $this->assertSame(0, $this->repository->count());

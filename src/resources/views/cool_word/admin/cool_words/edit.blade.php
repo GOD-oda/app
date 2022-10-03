@@ -25,8 +25,11 @@
       @csrf
 
       <div class="mb-3">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $name) }}">
+        @include('cool_word.admin.cool_words.form_components.name', ['value' => $name, 'disabled' => true])
+      </div>
+
+      <div class="mb-3">
+        @include('cool_word.admin.cool_words.form_components.description', ['value' => $description])
       </div>
 
       <button type="submit" class="btn btn-primary">Edit</button>
