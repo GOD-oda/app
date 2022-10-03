@@ -16,7 +16,8 @@ class CoolWordTest extends TestCase
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
             name: new Name('foo'),
-            views: 0
+            views: 0,
+            description: ''
         );
 
         $this->assertInstanceOf(CoolWordId::class, $coolWord->id());
@@ -27,7 +28,8 @@ class CoolWordTest extends TestCase
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
             name: new Name('foo'),
-            views: 0
+            views: 0,
+            description: ''
         );
 
         $this->assertInstanceOf(Name::class, $coolWord->name());
@@ -39,7 +41,8 @@ class CoolWordTest extends TestCase
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
             name: $beforeName,
-            views: 0
+            views: 0,
+            description: ''
         );
 
         $newName = new Name('bar');
@@ -53,7 +56,8 @@ class CoolWordTest extends TestCase
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
             name: new Name('foo'),
-            views: 0
+            views: 0,
+            description: ''
         );
         $this->assertSame(0, $coolWord->views());
 
@@ -66,11 +70,13 @@ class CoolWordTest extends TestCase
     {
         $name = new Name('foo');
         $coolWord = CoolWord::new(
-            name: $name
+            name: $name,
+            description: 'foo'
         );
 
         $this->assertNull($coolWord->id());
         $this->assertSame('foo', $coolWord->name()->value);
         $this->assertSame(0, $coolWord->views());
+        $this->assertSame('foo', $coolWord->description());
     }
 }

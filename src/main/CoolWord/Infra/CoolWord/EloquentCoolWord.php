@@ -22,7 +22,8 @@ class EloquentCoolWord implements CoolWordRepository
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
             name: new Name($coolWord->name),
-            views: $coolWord->views
+            views: $coolWord->views,
+            description: $coolWord->description
         );
     }
 
@@ -38,7 +39,8 @@ class EloquentCoolWord implements CoolWordRepository
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
             name: new Name($coolWord->name),
-            views: $coolWord->views
+            views: $coolWord->views,
+            description: $coolWord->description
         );
     }
 
@@ -52,6 +54,7 @@ class EloquentCoolWord implements CoolWordRepository
 
         $eloquentCoolWord->name = $coolWord->name()->value;
         $eloquentCoolWord->views = $coolWord->views();
+        $eloquentCoolWord->description = $coolWord->description();
         $eloquentCoolWord->save();
 
         return new CoolWordId($eloquentCoolWord->id);
@@ -68,7 +71,8 @@ class EloquentCoolWord implements CoolWordRepository
             return new CoolWord(
                 id: new CoolWordId($coolWord->id),
                 name: new Name($coolWord->name),
-                views: $coolWord->views
+                views: $coolWord->views,
+                description: $coolWord->description
             );
         });
 

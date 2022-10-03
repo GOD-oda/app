@@ -21,6 +21,7 @@ class CoolWord extends BaseModel
     protected $fillable = [
         'name',
         'views',
+        'description'
     ];
 
     public function scopeName(Builder $query, string $name): void
