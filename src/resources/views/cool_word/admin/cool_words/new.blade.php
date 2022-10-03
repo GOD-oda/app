@@ -24,7 +24,7 @@
       @csrf
 
       <div class="mb-3">
-        @include('cool_word.admin.cool_words.form_components.name', ['value' => ''])
+        @include('cool_word.admin.cool_words.form_components.name', ['value' => '', 'disabled' => false])
       </div>
 
       <div class="mb-3">
