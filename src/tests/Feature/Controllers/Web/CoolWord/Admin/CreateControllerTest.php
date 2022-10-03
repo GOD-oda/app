@@ -27,18 +27,34 @@ class CreateControllerTest extends TestCase
         $this->coolWordRepository = $this->app->make(CoolWordRepository::class);
     }
 
-    public function testSuccessCreate(): void
+    /**
+     * @dataProvider providesSuccessParameterPatterns
+     */
+    public function testSuccessCreate(array $params): void
     {
         $response = $this->actingAs($this->user)
             ->from(route('cool_word.admin.cool_words.show', ['id' => $this->user->id]))
-            ->post(route('cool_word.admin.cool_words.create'), [
-                'name' => 'foo'
-            ]);
+            ->post(route('cool_word.admin.cool_words.create'), $params);
 
         $response->assertStatus(302)
             ->assertRedirect(route('cool_word.admin.cool_words.show', ['id' => $this->user->id]));
 
         $this->assertSame(1, $this->coolWordRepository->count());
+    }
+
+    private function providesSuccessParameterPatterns(): array
+    {
+        return [
+            [
+                ['name' => 'foo']
+            ],
+            [
+                ['name' => 'foo', 'description' => '']
+            ],
+            [
+                ['name' => 'foo', 'description' => 'bar']
+            ]
+        ];
     }
 
     public function testFailCreate()
