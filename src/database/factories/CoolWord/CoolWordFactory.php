@@ -22,7 +22,7 @@ class CoolWordFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'views' => 0,
-            'description' => $this->faker->randomAscii()
+            'description' => $this->faker->text()
         ];
     }
 }
