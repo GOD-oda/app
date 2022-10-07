@@ -1,0 +1,25 @@
+name: Tagpr
+on:
+  push:
+    branches:
+      - "*"
+jobs:
+  tagpr:
+    runs-on: ubuntu-latest
+    outputs:
+      tag-name: ${{ steps.run-tagpr.outputs.tag }}
+      name: ${{ steps.foo.outputs.foo }}
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: step-foo
+        id: foo
+        run: echo "::set-output name=foo::oda"
+      - uses: Songmu/tagpr@main
+        id: run-tagpr
+  test:
+    runs-on: ubuntu-latest
+    needs: tagpr
+    steps:
+      - run: echo ${{ needs.tagpr.outputs.tag-name }} ${{ needs.tagpr.outputs.name }}
