@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.3](https://github.com/GOD-oda/playground/compare/v0.0.2...v0.0.3) - 2022-10-07
+- fix: tagpr by @GOD-oda in https://github.com/GOD-oda/playground/pull/31
+
 ## [v0.0.2](https://github.com/GOD-oda/playground/compare/v0.0.1...v0.0.2) - 2022-10-07
 - fix: tagpr by @GOD-oda in https://github.com/GOD-oda/playground/pull/29
 
