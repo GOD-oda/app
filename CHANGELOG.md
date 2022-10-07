@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.2](https://github.com/GOD-oda/playground/compare/v0.0.1...v0.0.2) - 2022-10-07
+- fix: tagpr by @GOD-oda in https://github.com/GOD-oda/playground/pull/29
+
 ## [v0.0.1](https://github.com/GOD-oda/playground/commits/v0.0.1) - 2022-10-07
 - github actions by @GOD-oda in https://github.com/GOD-oda/playground/pull/1
 - [CoolWord]DB接続とマイグレーション by @GOD-oda in https://github.com/GOD-oda/playground/pull/2
