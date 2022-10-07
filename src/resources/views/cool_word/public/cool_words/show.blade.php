@@ -2,8 +2,12 @@
 
 @section('main')
   <div class="container py-3">
-    <div class="row">
+    <div class="row py-2">
       <h1>{{ $coolWord['name'] }}</h1>
+    </div>
+
+    <div class="row py-2">
+      <p>{{ $coolWord['description'] }}</p>
     </div>
   </div>
 @endsection
