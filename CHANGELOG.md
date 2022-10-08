@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.5](https://github.com/GOD-oda/playground/compare/v0.0.4...v0.0.5) - 2022-10-08
+- [CoolWord]fix: Add name property by @GOD-oda in https://github.com/GOD-oda/playground/pull/36
+
 ## [v0.0.4](https://github.com/GOD-oda/playground/compare/v0.0.3...v0.0.4) - 2022-10-08
 - [CoolWord]公開ページのcss by @GOD-oda in https://github.com/GOD-oda/playground/pull/34
 
