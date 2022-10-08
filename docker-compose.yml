@@ -19,6 +19,10 @@ services:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
       target: ${APP_BUILD_TARGET:-local}
+    volumes:
+      - type: bind
+        source: ./src/public
+        target: /var/www/html/public
     ports:
       - "8000:80"
     depends_on:
