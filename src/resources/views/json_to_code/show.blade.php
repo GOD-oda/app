@@ -56,8 +56,7 @@
         }
       }).then(res => {
         let outputDiv = document.getElementById('output');
-        let php = res.php;
-        outputDiv.innerHTML = php.replace(/\\n/g, '<br>').replace(/\\/g, '');
+        outputDiv.innerHTML = res.php;
       }).catch(error => {
         console.log(error);
       });

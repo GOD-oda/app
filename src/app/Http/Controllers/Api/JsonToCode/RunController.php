@@ -26,6 +26,8 @@ class RunController extends Controller
             '}' => ']',
             ': ' => ' => ',
             '"' => "'",
+            '\n' => '<br>',
+            '\\' => ''
         ];
         $result = str_replace(array_keys($rule), array_values($rule), $json);
 

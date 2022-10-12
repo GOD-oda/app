@@ -23,12 +23,12 @@ class RunControllerTest extends TestCase
   "tags": [ "home", "green" ]
 }
 EOI;
-        $output = implode('\n', [
+        $output = implode('<br>', [
             '[',
-            '  \\\'productId\\\' => 1,',
-            '  \\\'productName\\\' => \\\'A green door\\\',',
-            '  \\\'price\\\' => 12.50,',
-            '  \\\'tags\\\' => [ \\\'home\\\', \\\'green\\\' ]',
+            '  \'productId\' => 1,',
+            '  \'productName\' => \'A green door\',',
+            '  \'price\' => 12.50,',
+            '  \'tags\' => [ \'home\', \'green\' ]',
             ']'
         ]);
 
