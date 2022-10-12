@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.6](https://github.com/GOD-oda/playground/compare/v0.0.5...v0.0.6) - 2022-10-12
+- Logoとheaderの調整 by @GOD-oda in https://github.com/GOD-oda/playground/pull/38
+
 ## [v0.0.5](https://github.com/GOD-oda/playground/compare/v0.0.4...v0.0.5) - 2022-10-08
 - [CoolWord]fix: Add name property by @GOD-oda in https://github.com/GOD-oda/playground/pull/36
 
