@@ -11,8 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+mix.js('resources/js/cool_word.js', 'public/js')
+    .sass('resources/sass/cool_word.scss', 'public/css')
     .options({
        processCssUrls: false
     });
