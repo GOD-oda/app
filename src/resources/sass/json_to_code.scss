@@ -1,0 +1,29 @@
+body.json_to_code {
+  header {
+    padding: 0 1rem;
+    border-bottom: solid .5px #d2d3d7;
+  }
+
+  main {
+    .output {
+      .php {
+        border-radius: 3px;
+        min-height: 12rem;
+        padding: 3rem 1rem .5rem;
+        position: relative;
+        white-space: pre-wrap;
+        border: 1px solid #dee2e6;
+
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: #dee2e6;
+          content: "php";
+          padding: .5rem;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}

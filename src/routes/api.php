@@ -18,6 +18,11 @@ Route::get('healthcheck', function () {
     return response()->json();
 });
 
+Route::prefix('json_to_code')->name('json_to_code.')->group(function () {
+    Route::post('/run', \App\Http\Controllers\Api\JsonToCode\RunController::class)->name('run');
+});
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
