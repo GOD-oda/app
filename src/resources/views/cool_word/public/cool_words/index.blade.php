@@ -1,4 +1,4 @@
-@extends('cool_word.public.cool_words.cool_word_base')
+@extends('cool_word.public.base')
 
 @section('main')
   <div class="index">
