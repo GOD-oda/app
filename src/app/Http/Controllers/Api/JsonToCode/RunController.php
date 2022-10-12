@@ -30,9 +30,7 @@ class RunController extends Controller
         $result = str_replace(array_keys($rule), array_values($rule), $json);
 
         return [
-            'json' => $json,
             'php' => $result,
-            'foo' => 'bar'
         ];
     }
 }
