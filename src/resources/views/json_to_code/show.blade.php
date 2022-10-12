@@ -23,7 +23,7 @@
     </form>
 
     <div class="output">
-      <div class="php border p-3" id="output" style="white-space: pre-wrap"></div>
+      <div class="php" id="output"></div>
     </div>
   </div>
 @endsection
