@@ -1,16 +1,14 @@
 body.cool_word {
-  background: #212121;
-  color: #fff;
+  header {
+    padding: 0 1rem;
+    border-bottom: solid .5px #d2d3d7;
+  }
 
   main {
     .index {
       .card {
-        background: #212121;
-        border: none;
-
         .card-body {
           a {
-            color: #fff;
             text-decoration: none;
           }
         }
