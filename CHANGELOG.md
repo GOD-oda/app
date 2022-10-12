@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.7](https://github.com/GOD-oda/playground/compare/v0.0.6...v0.0.7) - 2022-10-12
+- JsonToCode by @GOD-oda in https://github.com/GOD-oda/playground/pull/40
+
 ## [v0.0.6](https://github.com/GOD-oda/playground/compare/v0.0.5...v0.0.6) - 2022-10-12
 - Logoとheaderの調整 by @GOD-oda in https://github.com/GOD-oda/playground/pull/38
 
