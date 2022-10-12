@@ -6,12 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ Config::get('app.name') }}</title>
 
+  <link rel="icon" href="{{ asset('img/favicon.png') }}">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link href="{{ asset('/css/cool_word.css') }}" rel="stylesheet">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body class="cool_word">
+
 <header>
   <nav class="navbar navbar-light">
     {{-- TODO: トップページを作る --}}
@@ -19,7 +22,9 @@
       <img src="{{ asset('img/logo.png') }}" alt="playground" width="80" height="50">
     </a>
   </nav>
+
 </header>
+
 <main>
   @yield('main')
 </main>
