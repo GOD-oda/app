@@ -42,3 +42,6 @@ Route::prefix('auth')->name('auth.')->group(function () {
     });
 });
 
+Route::prefix('json_to_code')->name('json_to_code.')->group(function () {
+    Route::get('/', \App\Http\Controllers\Web\JsonToCode\ShowController::class)->name('show');
+});
