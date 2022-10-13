@@ -28,6 +28,7 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "CoolWord\\": "main/CoolWord/",
+            "JsonToCode\\": "main/JsonToCode/",
             "Main\\": "main"
         }
     },
