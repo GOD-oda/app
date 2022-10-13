@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.11](https://github.com/GOD-oda/playground/compare/v0.0.10...v0.0.11) - 2022-10-13
+- fix: Use nl2br() by @GOD-oda in https://github.com/GOD-oda/playground/pull/49
+
 ## [v0.0.10](https://github.com/GOD-oda/playground/compare/v0.0.9...v0.0.10) - 2022-10-13
 - testsディレクトリの調整 by @GOD-oda in https://github.com/GOD-oda/playground/pull/47
 
