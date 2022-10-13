@@ -7,7 +7,7 @@
     </div>
 
     <div class="row py-2">
-      <p>{{ $coolWord['description'] }}</p>
+      <p>{!! nl2br(e($coolWord['description'])) !!}</p>
     </div>
   </div>
 @endsection
