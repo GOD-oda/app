@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.9](https://github.com/GOD-oda/playground/compare/v0.0.8...v0.0.9) - 2022-10-13
+- fix: Refactoring by @GOD-oda in https://github.com/GOD-oda/playground/pull/45
+
 ## [v0.0.8](https://github.com/GOD-oda/playground/compare/v0.0.7...v0.0.8) - 2022-10-13
 - fix: clean_up_images.yml by @GOD-oda in https://github.com/GOD-oda/playground/pull/42
 
