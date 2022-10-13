@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.10](https://github.com/GOD-oda/playground/compare/v0.0.9...v0.0.10) - 2022-10-13
+- testsディレクトリの調整 by @GOD-oda in https://github.com/GOD-oda/playground/pull/47
+
 ## [v0.0.9](https://github.com/GOD-oda/playground/compare/v0.0.8...v0.0.9) - 2022-10-13
 - fix: Refactoring by @GOD-oda in https://github.com/GOD-oda/playground/pull/45
 
