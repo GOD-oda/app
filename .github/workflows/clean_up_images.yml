@@ -21,7 +21,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       - name: Clean up
         run: |
-          LIGHTSAIL_CONTAINER_IMAGES=$(aws lightsail get-container-images --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }}) | jq '.containerImages | reverse')
+          LIGHTSAIL_CONTAINER_IMAGES=$(aws lightsail get-container-images --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} | jq '.containerImages | reverse')
 
           # Remove all app_images other than latest
           APP_IMAGES=$(echo "$LIGHTSAIL_CONTAINER_IMAGES" | jq '.[] | select(contains({image: "app"}))' | jq -s '.')
@@ -29,7 +29,7 @@ jobs:
           if [ "$APP_IMAGE_LENGTH" -gt 2 ]; then
             for i in `seq 0 $((${APP_IMAGE_LENGTH} - 2))`; do
               IMAGE_NAME=$(echo "$APP_IMAGES" | jq -r '.['"$i"'] | .image')
-              aws lightsail delete-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }}) --image "$IMAGE_NAME"
+              aws lightsail delete-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} --image "$IMAGE_NAME"
             done
           fi
           
@@ -39,6 +39,6 @@ jobs:
           if [ "$WEB_IMAGE_LENGTH" -gt 2 ]; then
             for i in `seq 0 $((${WEB_IMAGE_LENGTH} - 2))`; do
               IMAGE_NAME=$(echo "$WEB_IMAGES" | jq -r '.['"$i"'] | .image')
-              aws lightsail delete-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }}) --image "$IMAGE_NAME"
+              aws lightsail delete-container-image --service-name ${{ secrets.LIGHTSAIL_SERVICE_NAME }} --image "$IMAGE_NAME"
             done
           fi
