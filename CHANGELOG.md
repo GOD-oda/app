@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.12](https://github.com/GOD-oda/playground/compare/v0.0.11...v0.0.12) - 2022-10-14
+- fix: Sp UI by @GOD-oda in https://github.com/GOD-oda/playground/pull/51
+
 ## [v0.0.11](https://github.com/GOD-oda/playground/compare/v0.0.10...v0.0.11) - 2022-10-13
 - fix: Use nl2br() by @GOD-oda in https://github.com/GOD-oda/playground/pull/49
 
