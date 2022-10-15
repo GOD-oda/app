@@ -9,6 +9,7 @@ use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\CoolWordService;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\TagCollection;
 use Tests\DatabaseRefreshable;
 use Tests\TestCase;
 
@@ -35,7 +36,8 @@ class CoolWordServiceTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $this->assertFalse($this->service->isDuplicated($coolWord));
     }
@@ -46,7 +48,8 @@ class CoolWordServiceTest extends TestCase
             id: null,
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $this->repository->store($coolWord);
 
@@ -54,7 +57,8 @@ class CoolWordServiceTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
 
         $this->assertTrue($this->service->isDuplicated($anotherCoolWord));

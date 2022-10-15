@@ -27,6 +27,7 @@ rebuild:
 	@make build
 
 test:
+	@make down
 	docker compose run --rm app composer phpunit
 
 phpstan:

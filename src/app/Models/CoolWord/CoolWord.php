@@ -4,6 +4,7 @@ namespace App\Models\CoolWord;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\CoolWord\CoolWord
@@ -23,6 +24,11 @@ class CoolWord extends BaseModel
         'views',
         'description'
     ];
+
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 
     public function scopeName(Builder $query, string $name): void
     {

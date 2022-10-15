@@ -7,6 +7,7 @@ namespace Tests\Main\CoolWord\Domain\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\TagCollection;
 use Tests\TestCase;
 
 class CoolWordTest extends TestCase
@@ -17,7 +18,8 @@ class CoolWordTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: 'description'
+            description: 'description',
+            tags: new TagCollection()
         );
 
         $this->assertInstanceOf(CoolWordId::class, $coolWord->id());
@@ -36,7 +38,8 @@ class CoolWordTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $this->assertTrue($coolWord->hasId());
 
@@ -44,7 +47,8 @@ class CoolWordTest extends TestCase
             id: null,
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $this->assertFalse($coolWord->hasId());
     }
@@ -56,7 +60,8 @@ class CoolWordTest extends TestCase
             id: new CoolWordId(1),
             name: $beforeName,
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
 
         $newName = new Name('bar');
@@ -71,7 +76,8 @@ class CoolWordTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $this->assertSame(0, $coolWord->views());
 
@@ -86,7 +92,8 @@ class CoolWordTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: 'foo'
+            description: 'foo',
+            tags: new TagCollection()
         );
         $coolWord->changeDescription('bar');
 

@@ -9,6 +9,8 @@ use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\Tag;
+use CoolWord\Domain\CoolWord\TagCollection;
 
 class EloquentCoolWord implements CoolWordRepository
 {
@@ -19,11 +21,19 @@ class EloquentCoolWord implements CoolWordRepository
             return null;
         }
 
+        $tags = [];
+        $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
+            $tags[] = new Tag(
+                name: $tag->name
+            );
+        });
+
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
             name: new Name($coolWord->name),
             views: $coolWord->views,
-            description: $coolWord->description
+            description: $coolWord->description,
+            tags: new TagCollection(...$tags)
         );
     }
 
@@ -36,11 +46,19 @@ class EloquentCoolWord implements CoolWordRepository
             return null;
         }
 
+        $tags = [];
+        $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
+            $tags[] = new Tag(
+                name: $tag->name
+            );
+        });
+
         return new CoolWord(
             id: new CoolWordId($coolWord->id),
             name: new Name($coolWord->name),
             views: $coolWord->views,
-            description: $coolWord->description
+            description: $coolWord->description,
+            tags: new TagCollection(...$tags)
         );
     }
 
@@ -68,11 +86,19 @@ class EloquentCoolWord implements CoolWordRepository
             ->get();
 
         $collection = $eloquentCoolWords->map(function (\App\Models\CoolWord\CoolWord $coolWord) {
+            $tags = [];
+            $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
+                $tags[] = new Tag(
+                    name: $tag->name
+                );
+            });
+
             return new CoolWord(
                 id: new CoolWordId($coolWord->id),
                 name: new Name($coolWord->name),
                 views: $coolWord->views,
-                description: $coolWord->description
+                description: $coolWord->description,
+                tags: new TagCollection(...$tags)
             );
         });
 
