@@ -15,7 +15,7 @@
         @endforeach
       </div>
 
-      <div class="row">
+      <div class="pagination justify-content-end">
         {{ $paginator->links() }}
       </div>
     </div>
