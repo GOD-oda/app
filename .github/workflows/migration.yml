@@ -11,8 +11,6 @@ jobs:
       - name: Variables
         id: variables
         run: |
-          echo ${{ github.event.pull_request.labels }}
-          LABEL_NAMES=${{ github.event.pull_request.labels.*.name }}
-          for v in "${LABEL_NAMES[@]"; do
+          for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
           done
