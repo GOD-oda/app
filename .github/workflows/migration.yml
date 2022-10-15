@@ -6,9 +6,9 @@ on:
 jobs:
   migrate:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'CoolWord')
+    # if: contains(github.event.pull_request.labels.*.name, 'CoolWord')
     steps:
       - name: Variables
         id: variables
         run: |
-          echo ${GITHUB_REF#refs/tags/}
+          echo ${{ github.event.pull_request.labels.*.name }}
