@@ -6,6 +6,7 @@ namespace Tests\Unit\Main\CoolWord\Domain\CoolWord;
 
 use CoolWord\Domain\CoolWord\Tag;
 use CoolWord\Domain\CoolWord\TagCollection;
+use CoolWord\Domain\CoolWord\TagId;
 use Tests\TestCase;
 
 class TagCollectionTest extends TestCase
@@ -17,6 +18,7 @@ class TagCollectionTest extends TestCase
 
         $tags = [
             new Tag(
+                id: new TagId(1),
                 name: 'foo'
             )
         ];
