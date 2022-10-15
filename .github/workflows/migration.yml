@@ -23,8 +23,8 @@ jobs:
           echo "foo"
   test:
     runs-on: ubuntu-latest
-    if: "steps.run-tagpr.outputs.tag != ''"
+    if: needs.tagpr.outputs.tag != ''
     steps:
       - name: test
         run: |
-          echo ${{ steps.run-tagpr.outputs.tag }}
+          echo ${{ needs.tagpr.outputs.tagpr-tag }}
