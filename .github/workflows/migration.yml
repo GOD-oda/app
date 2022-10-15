@@ -43,5 +43,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: test2
+        env:
+          BOOL: contains(github.event.pull_request.labels.*.name, 'CoolWord')
         run: |
-          echo contains(github.event.pull_request.labels.*.name, 'CoolWord')
+          echo ${BOOL}
