@@ -10,7 +10,8 @@ final class CoolWord
         private readonly ?CoolWordId $id,
         private Name $name,
         private int $views,
-        private string $description
+        private string $description,
+        private TagCollection $tags
     ) {}
 
     public function id(): ?CoolWordId
@@ -53,13 +54,19 @@ final class CoolWord
         $this->description = $description;
     }
 
+    public function tags(): TagCollection
+    {
+        return $this->tags;
+    }
+
     public static function new(Name $name, string $description): self
     {
         return new self(
             id: null,
             name: $name,
             views: 0,
-            description: $description
+            description: $description,
+            tags: new TagCollection() // TODO
         );
     }
 }

@@ -8,6 +8,7 @@ use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\TagCollection;
 use Tests\TestCase;
 
 class CoolWordCollectionTest extends TestCase
@@ -19,7 +20,8 @@ class CoolWordCollectionTest extends TestCase
             id: new CoolWordId(1),
             name: new Name('foo'),
             views: 0,
-            description: ''
+            description: '',
+            tags: new TagCollection()
         );
         $collection = $collection->add($coolWord);
 
