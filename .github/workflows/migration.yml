@@ -19,6 +19,7 @@ jobs:
       - name: Variables
         id: variables
         run: |
+          echo "foo"
           echo ${{ steps.tagpr.outputs.tag }}
           for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
