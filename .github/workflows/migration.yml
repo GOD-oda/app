@@ -27,6 +27,7 @@ jobs:
     needs: tagpr
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: test
         run: |
           echo ${{ needs.tagpr.outputs.tagpr-tag }}
