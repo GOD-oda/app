@@ -16,11 +16,11 @@ jobs:
         id: run-tagpr
   migrate:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'coolword')
     steps:
       - uses: actions/checkout@v3
       - name: Variables
         id: variables
+        if: contains(github.event.pull_request.labels.*.name, 'coolword')
         run: |
           echo "foo"
   test:
