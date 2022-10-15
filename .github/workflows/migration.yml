@@ -16,4 +16,4 @@ jobs:
           for v in "${LABEL_NAMES[@]" \
           do \
             echo "{$v}" \
-          done
+          done \
