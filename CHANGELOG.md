@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.0.14](https://github.com/GOD-oda/playground/compare/v0.0.13...v0.0.14) - 2022-10-15
+- Cool word tags migration by @GOD-oda in https://github.com/GOD-oda/playground/pull/58
+- fix: Add command by @GOD-oda in https://github.com/GOD-oda/playground/pull/60
+
 ## [v0.0.13](https://github.com/GOD-oda/playground/compare/v0.0.12...v0.0.13) - 2022-10-15
 - fix: Pagination UI by @GOD-oda in https://github.com/GOD-oda/playground/pull/54
 
