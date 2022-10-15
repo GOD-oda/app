@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.13](https://github.com/GOD-oda/playground/compare/v0.0.12...v0.0.13) - 2022-10-15
+- fix: Pagination UI by @GOD-oda in https://github.com/GOD-oda/playground/pull/54
+
 ## [v0.0.12](https://github.com/GOD-oda/playground/compare/v0.0.11...v0.0.12) - 2022-10-14
 - fix: Sp UI by @GOD-oda in https://github.com/GOD-oda/playground/pull/51
 
