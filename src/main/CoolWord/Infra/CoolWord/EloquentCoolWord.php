@@ -11,6 +11,7 @@ use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
 use CoolWord\Domain\CoolWord\Tag;
 use CoolWord\Domain\CoolWord\TagCollection;
+use CoolWord\Domain\CoolWord\TagId;
 
 class EloquentCoolWord implements CoolWordRepository
 {
@@ -24,6 +25,7 @@ class EloquentCoolWord implements CoolWordRepository
         $tags = [];
         $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
             $tags[] = new Tag(
+                id: new TagId($tag->id),
                 name: $tag->name
             );
         });
@@ -49,6 +51,7 @@ class EloquentCoolWord implements CoolWordRepository
         $tags = [];
         $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
             $tags[] = new Tag(
+                id: new TagId(1),
                 name: $tag->name
             );
         });
@@ -89,6 +92,7 @@ class EloquentCoolWord implements CoolWordRepository
             $tags = [];
             $coolWord->tags()->each(function (\App\Models\CoolWord\Tag $tag) use (&$tags) {
                 $tags[] = new Tag(
+                    id: new TagId(1),
                     name: $tag->name
                 );
             });
