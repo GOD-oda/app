@@ -4,6 +4,14 @@ on:
     branches:
       - "gh-migration"
 jobs:
+  tagpr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: Songmu/tagpr@v1
+        id: run-tagpr
   migrate:
     runs-on: ubuntu-latest
     # if: contains(github.event.pull_request.labels.*.name, 'CoolWord')
@@ -11,6 +19,7 @@ jobs:
       - name: Variables
         id: variables
         run: |
+          echo ${{ steps.tagpr.outputs.tag }}
           for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
           done
