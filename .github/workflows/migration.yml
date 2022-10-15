@@ -1,0 +1,11 @@
+name: Migration
+on:
+  workflow_dispatch:
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Variables
+        id: variables
+        run: |
+          echo ${GITHUB_REF#refs/tags/}
