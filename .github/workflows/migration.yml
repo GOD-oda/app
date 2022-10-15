@@ -16,11 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     # if: contains(github.event.pull_request.labels.*.name, 'CoolWord')
     steps:
+      - uses: actions/checkout@v3
       - name: Variables
         id: variables
         run: |
           echo "foo"
-          echo "${{ steps.tagpr.outputs.tag }}"
+          # echo "${{ steps.tagpr.outputs.tag }}"
           echo "${{ github.event.pull_request.labels[0].name }}
           for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
