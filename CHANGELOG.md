@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.0.15](https://github.com/GOD-oda/playground/compare/v0.0.14...v0.0.15) - 2022-10-15
+- fix: Remove command by @GOD-oda in https://github.com/GOD-oda/playground/pull/61
+
 ## [v0.0.14](https://github.com/GOD-oda/playground/compare/v0.0.13...v0.0.14) - 2022-10-15
 - Cool word tags migration by @GOD-oda in https://github.com/GOD-oda/playground/pull/58
 - fix: Add command by @GOD-oda in https://github.com/GOD-oda/playground/pull/60
