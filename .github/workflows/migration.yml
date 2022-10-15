@@ -23,7 +23,6 @@ jobs:
           echo "foo"
   test:
     runs-on: ubuntu-latest
-    if: needs.tagpr.outputs.tag != ''
     steps:
       - name: test
         run: |
