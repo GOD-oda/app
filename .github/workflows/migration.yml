@@ -13,7 +13,6 @@ jobs:
         run: |
           echo ${{ github.event.pull_request.labels }}
           LABEL_NAMES=${{ github.event.pull_request.labels.*.name }}
-          for v in "${LABEL_NAMES[@]" \
-          do \
-            echo "{$v}" \
-          done \
+          for v in "${LABEL_NAMES[@]"; do
+            echo "{$v}"
+          done
