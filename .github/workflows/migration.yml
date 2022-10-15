@@ -27,3 +27,6 @@ jobs:
           for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
           done
+          
+          arr=("a" "b" "c")
+          echo ${array[@]}
