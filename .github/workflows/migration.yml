@@ -48,6 +48,6 @@ jobs:
           echo "::set-output name=hoge::FOO #12345"
       - name: test2
         env:
-          STEPS_CONTEXT: ${{ toJson(steps.my_variables) }}
+          STEPS_CONTEXT: ${{ toJson(steps.first) }}
         run: |
           echo ${STEPS_CONTEXT}
