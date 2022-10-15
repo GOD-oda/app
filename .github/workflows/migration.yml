@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "foo"
           # echo "${{ steps.tagpr.outputs.tag }}"
-          echo "${{ github.event.pull_request.labels[0].name }}
+          echo "${{ github.event.pull_request.labels[0].name }}"
           for v in "${{ github.event.pull_request.labels.*.name }}[@]"; do
             echo "{$v}"
           done
