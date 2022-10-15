@@ -27,6 +27,7 @@ jobs:
           echo "foo"
   test:
     needs: tagpr
+    if: needs.tagpr.outputs.tagpr-tag != ''
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
