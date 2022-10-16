@@ -78,6 +78,11 @@ class EloquentCoolWord implements CoolWordRepository
         $eloquentCoolWord->description = $coolWord->description();
         $eloquentCoolWord->save();
 
+        $tagIds = array_map(function (Tag $tag) {
+            return $tag->id()->value;
+        }, $coolWord->tags()->all());
+        $eloquentCoolWord->tags()->sync($tagIds);
+
         return new CoolWordId($eloquentCoolWord->id);
     }
 

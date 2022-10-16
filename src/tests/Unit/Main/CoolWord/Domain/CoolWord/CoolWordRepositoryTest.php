@@ -10,6 +10,10 @@ use CoolWord\Domain\CoolWord\CoolWordCollection;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\CoolWordRepository;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\Tag;
+use CoolWord\Domain\CoolWord\TagCollection;
+use CoolWord\Domain\CoolWord\TagId;
+use CoolWord\Domain\CoolWord\TagRepository;
 use Database\Factories\CoolWord\CoolWordFactory;
 use Tests\DatabaseRefreshable;
 use Tests\TestCase;
@@ -18,7 +22,8 @@ class CoolWordRepositoryTest extends TestCase
 {
     use DatabaseRefreshable;
 
-    private CoolWordRepository $repository;
+    private CoolWordRepository $coolWordRepository;
+    private TagRepository $tagRepository;
 
     protected function setUp(): void
     {
@@ -26,7 +31,8 @@ class CoolWordRepositoryTest extends TestCase
 
         $this->refreshDatabase();
 
-        $this->repository = $this->app->make(CoolWordRepository::class);
+        $this->coolWordRepository = $this->app->make(CoolWordRepository::class);
+        $this->tagRepository = $this->app->make(TagRepository::class);
     }
 
     /**
@@ -42,7 +48,7 @@ class CoolWordRepositoryTest extends TestCase
     {
         CoolWordFactory::new($initialCoolWordParameters)->create();
 
-        $res = $this->repository->index($page, $perPage, $where);
+        $res = $this->coolWordRepository->index($page, $perPage, $where);
         $this->assertInstanceOf(CoolWordCollection::class, $res);
         $this->assertCount($expectedCount, $res);
     }
@@ -59,51 +65,97 @@ class CoolWordRepositoryTest extends TestCase
     public function testFindById(): void
     {
         $coolWordId = new CoolWordId(1);
-        $res = $this->repository->findById($coolWordId);
+        $res = $this->coolWordRepository->findById($coolWordId);
         $this->assertNull($res);
 
         $coolWord = CoolWordFactory::new()->create();
         $coolWordId = new CoolWordId($coolWord->id);
-        $res = $this->repository->findById($coolWordId);
+        $res = $this->coolWordRepository->findById($coolWordId);
         $this->assertInstanceOf(CoolWord::class, $res);
     }
 
     public function testFindByName(): void
     {
         $name = new Name('foo');
-        $res = $this->repository->findByName($name);
+        $res = $this->coolWordRepository->findByName($name);
         $this->assertNull($res);
 
         $coolWord = CoolWordFactory::new()->create();
         $name = new Name($coolWord->name);
-        $res = $this->repository->findByName($name);
+        $res = $this->coolWordRepository->findByName($name);
         $this->assertInstanceOf(CoolWord::class, $res);
     }
 
-    public function testStore(): void
+    public function testStoreNew(): void
     {
         $coolWord = CoolWord::new(
             name: new Name('foo'),
             description: 'description'
         );
+        $tag = \App\Models\CoolWord\Tag::factory()->create();
+        $coolWord->addTag(new Tag(
+            id: new TagId($tag->id),
+            name: $tag->name
+        ));
 
-        $coolWordId = $this->repository->store($coolWord);
-        $saved = $this->repository->findById($coolWordId);
+        $coolWordId = $this->coolWordRepository->store($coolWord);
+        $saved = $this->coolWordRepository->findById($coolWordId);
 
         $this->assertNotNull($saved->id());
         // 値だけ確認できれば良いのでEqualsを使っている
         $this->assertEquals($coolWord->name(), $saved->name());
         $this->assertEquals($coolWord->views(), $saved->views());
         $this->assertEquals($coolWord->description(), $saved->description());
+        $this->assertSame($tag->name, $saved->tags()->all()[0]->name());
+    }
+
+    public function testStoreSaved(): void
+    {
+        $coolWord = \App\Models\CoolWord\CoolWord::factory()
+            ->has(\App\Models\CoolWord\Tag::factory([
+                'name' => 'before'
+            ]))
+            ->create([
+                'name' => 'before',
+                'description' => 'before',
+            ]);
+        $coolWordBeforeSave = $this->coolWordRepository->findById(new CoolWordId($coolWord->id));
+
+        $tag = \App\Models\CoolWord\Tag::factory()->create([
+            'name' => 'after'
+        ]);
+        $tags = new TagCollection(...[
+            new Tag(
+                id: new TagId($tag->id),
+                name: $tag->name
+            )
+        ]);
+        $coolWordId = $this->coolWordRepository->store(new CoolWord(
+            id: new CoolWordId($coolWord->id),
+            name: new Name('after'),
+            views: 1,
+            description: 'after',
+            tags: $tags
+        ));
+
+        $updatedCoolWord = $this->coolWordRepository->findById($coolWordId);
+        $this->assertNotSame($coolWordBeforeSave->name(), $updatedCoolWord->name()->value);
+        $this->assertSame('after', $updatedCoolWord->name()->value);
+        $this->assertNotSame($coolWordBeforeSave->description(), $updatedCoolWord->description());
+        $this->assertSame('after', $updatedCoolWord->description());
+        $this->assertNotSame($coolWordBeforeSave->views(), $updatedCoolWord->views());
+        $this->assertSame(1, $updatedCoolWord->views());
+        $this->assertNotSame($coolWordBeforeSave->tags()->all()[0]->name(), $updatedCoolWord->tags()->all()[0]->name());
+        $this->assertSame('after', $updatedCoolWord->tags()->all()[0]->name());
     }
 
     public function testCount(): void
     {
-        $this->assertSame(0, $this->repository->count());
+        $this->assertSame(0, $this->coolWordRepository->count());
 
         EloquentCoolWord::factory()->create();
 
-        $this->assertSame(1, $this->repository->count());
+        $this->assertSame(1, $this->coolWordRepository->count());
     }
 
     public function testCountUpViews()
@@ -111,8 +163,8 @@ class CoolWordRepositoryTest extends TestCase
         $model = EloquentCoolWord::factory()->create();
         $id = new CoolWordId($model->id);
 
-        $this->repository->countUpViews($id, 1);
+        $this->coolWordRepository->countUpViews($id, 1);
 
-        $this->assertSame(1, $this->repository->findById($id)->views());
+        $this->assertSame(1, $this->coolWordRepository->findById($id)->views());
     }
 }
