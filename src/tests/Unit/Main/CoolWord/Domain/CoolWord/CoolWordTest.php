@@ -7,7 +7,9 @@ namespace Tests\Main\CoolWord\Domain\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWord;
 use CoolWord\Domain\CoolWord\CoolWordId;
 use CoolWord\Domain\CoolWord\Name;
+use CoolWord\Domain\CoolWord\Tag;
 use CoolWord\Domain\CoolWord\TagCollection;
+use CoolWord\Domain\CoolWord\TagId;
 use Tests\TestCase;
 
 class CoolWordTest extends TestCase
@@ -30,9 +32,10 @@ class CoolWordTest extends TestCase
         $this->assertSame(0, $coolWord->views());
         $this->assertIsString($coolWord->description());
         $this->assertSame('description', $coolWord->description());
+        $this->assertInstanceOf(TagCollection::class, $coolWord->tags());
     }
 
-    public function testHasId()
+    public function testHasId(): void
     {
         $coolWord = new CoolWord(
             id: new CoolWordId(1),
@@ -100,7 +103,25 @@ class CoolWordTest extends TestCase
         $this->assertSame('bar', $coolWord->description());
     }
 
-    public function testNew()
+    public function testAddTag(): void
+    {
+        $coolWord = new CoolWord(
+            id: new CoolWordId(1),
+            name: new Name('foo'),
+            views: 0,
+            description: 'foo',
+            tags: new TagCollection()
+        );
+        $coolWord->addTag(
+            new Tag(
+                id: new TagId(1),
+                name: 'foo'
+            )
+        );
+        $this->assertCount(1, $coolWord->tags()->all());
+    }
+
+    public function testNew(): void
     {
         $coolWord = CoolWord::new(
             name: new Name('foo'),

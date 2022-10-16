@@ -59,6 +59,11 @@ final class CoolWord
         return $this->tags;
     }
 
+    public function addTag(Tag $tag): void
+    {
+        $this->tags = $this->tags()->add($tag);
+    }
+
     public static function new(Name $name, string $description): self
     {
         return new self(
@@ -66,7 +71,7 @@ final class CoolWord
             name: $name,
             views: 0,
             description: $description,
-            tags: new TagCollection() // TODO
+            tags: new TagCollection()
         );
     }
 }

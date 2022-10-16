@@ -25,4 +25,19 @@ class TagCollectionTest extends TestCase
         $tagCollection = new TagCollection(...$tags);
         $this->assertCount(1, $tagCollection);
     }
+
+    public function testAdd()
+    {
+        $tagCollection = new TagCollection();
+        $this->assertCount(0, $tagCollection);
+
+        $newTagCollection = $tagCollection->add(
+            new Tag(
+                id: new TagId(1),
+                name: 'foo'
+            )
+        );
+        $this->assertNotSame($newTagCollection, $tagCollection);
+        $this->assertCount(1, $tagCollection);
+    }
 }
