@@ -15,6 +15,11 @@ final class TagCollection implements \IteratorAggregate
         $this->items = $items;
     }
 
+    public function add(Tag $tag): self
+    {
+        return new self(...array_merge($this->items, [$tag]));
+    }
+
     /**
      * @return Tag[]
      */
