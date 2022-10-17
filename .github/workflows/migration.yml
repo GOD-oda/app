@@ -1,8 +1,6 @@
 name: Migration
 on:
   workflow_run:
-    branches:
-      - "**"
     workflows:
       - Phpunit
       - Phpstan
