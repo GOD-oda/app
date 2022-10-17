@@ -1,0 +1,16 @@
+name: AttachReleaseTag
+on:
+  workflow_run:
+    workflows:
+      - Phpunit
+      - Phpstan
+    types:
+      - completed
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Attach
+        run: |
+          echo "test"
