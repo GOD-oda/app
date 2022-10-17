@@ -1,4 +1,4 @@
-name: AttachReleaseTag
+name: Migration
 on:
   workflow_run:
     workflows:
