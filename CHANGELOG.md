@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.0.16](https://github.com/GOD-oda/playground/compare/v0.0.15...v0.0.16) - 2022-10-17
+- fix: Add TagId by @GOD-oda in https://github.com/GOD-oda/playground/pull/64
+- feat: Implement logic to add tag to CoolWord aggregate by @GOD-oda in https://github.com/GOD-oda/playground/pull/66
+- feat: Implement TagRepository by @GOD-oda in https://github.com/GOD-oda/playground/pull/67
+- feat: Sync CoolWord and Tag by @GOD-oda in https://github.com/GOD-oda/playground/pull/68
+
 ## [v0.0.13](https://github.com/GOD-oda/playground/compare/v0.0.12...v0.0.13) - 2022-10-15
 - fix: Pagination UI by @GOD-oda in https://github.com/GOD-oda/playground/pull/54
 
