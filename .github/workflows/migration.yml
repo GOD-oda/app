@@ -1,53 +1,16 @@
-name: Migration
+name: AttachReleaseTag
 on:
-  push:
-    branches:
-      - "gh-migration"
+  workflow_run:
+    workflows:
+      - Phpunit
+      - Phpstan
+    types:
+      - completed
 jobs:
-  tagpr:
+  attach:
     runs-on: ubuntu-latest
-    outputs:
-      tagpr-tag: ${{ steps.run-tagpr.outputs.tag }}
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: Songmu/tagpr@v1
-        id: run-tagpr
-  migrate:
-    runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    steps:
-      - uses: actions/checkout@v3
-      - name: Variables
-        id: variables
-        if: contains(github.event.pull_request.labels.*.name, 'CoolWord')
+      - name: Attach
         run: |
-          echo "foo"
-  test:
-    needs: tagpr
-    if: needs.tagpr.outputs.tagpr-tag != ''
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: test
-        run: |
-          echo ${{ needs.tagpr.outputs.tagpr-tag }}
-  test2:
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: first
-        id: first
-        run: |
-          echo "::set-output name=hoge::FOO #12345"
-      - name: test2
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps.first) }}
-        run: |
-          echo ${STEPS_CONTEXT}
+          echo "test"
