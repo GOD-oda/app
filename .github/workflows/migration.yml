@@ -7,10 +7,17 @@ on:
     types:
       - completed
 jobs:
-  attach:
+  attach_fail:
     runs-on: ubuntu-latest
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: Attach
         run: |
-          echo "test"
+          echo "fail"
+  attach_success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Attach
+        run: |
+          echo "successs"
