@@ -1,0 +1,23 @@
+name: Migration
+on:
+  workflow_run:
+    workflows:
+      - Phpunit
+      - Phpstan
+    types:
+      - completed
+jobs:
+  attach_fail:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Attach
+        run: |
+          echo "fail"
+  attach_success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Attach
+        run: |
+          echo "successs"

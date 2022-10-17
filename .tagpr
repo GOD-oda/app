@@ -31,5 +31,5 @@
 #       If this value is not set, the release is to be created.
 [tagpr]
 	vPrefix = true
-	releaseBranch = master
+	releaseBranch = gh-migration
 	versionFile = -
